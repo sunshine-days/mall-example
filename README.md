@@ -1,6 +1,6 @@
 # mall
 
-> mall for 1gene
+> mallDemo
 
 ## Build Setup
 
