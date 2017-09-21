@@ -1,40 +1,30 @@
 <template>
 <div>
- 
     <div class="mall-tabbar">
-        <ul>
-            <li class="tabbar-list list-common">
-                <div class="list-icon">
-                    <img class="list-icon-img" src="../../assets/home.png"/>
-                </div>
-                <p class="list-label">
-                    <span>首页</span>
-                </p>
-            </li>
-            <li class="tabbar-list list-common">
-                <div class="list-icon">
-                    <img class="list-icon-img" src="../../assets/home.png"/>
-                </div>
-                <p class="list-label">
-                    <span>首页</span>
-                </p>
-            </li>
-            <li class="tabbar-list list-common">
-                <div class="list-icon">
-                    <img class="list-icon-img" src="../../assets/home.png"/>
-                </div>
-                <p class="list-label">
-                    <span>首页</span>
-                </p>
-            </li>
-            <li class="tabbar-list list-cart">
-
-                <x-button type="warn" mini>购物车</x-button>
-            </li>
-            <li class="tabbar-list list-order">
-                <x-button type="warn" mini>立即下单</x-button>
-            </li>
-        </ul>
+        <a class="tabbar-left">
+            <div class="tabbar-icon">
+                <img src="../../assets/customerservice.png">
+            </div> 
+            <span>客服</span>
+        </a>
+        <a class="tabbar-left">
+            <div class="tabbar-icon">
+                <img src="../../assets/home.png">
+            </div> 
+            <span>首页</span>
+        </a>
+        <a class="tabbar-left">
+            <div class="tabbar-icon">
+                <img src="../../assets/cart.png">
+            </div> 
+            <span>购物车</span>
+        </a>
+        <a class="tabbar-right" style="background-color:#475669">
+            <span>加入购物车</span>
+        </a>
+        <a class="tabbar-right" style="background-color:#FF4949">
+            <span>立即下单</span>
+        </a>
     </div>
 </div>
 </template>
@@ -100,39 +90,36 @@ export default {
 .mall-tabbar{
   position:fixed;
   width:100%;
+  height: 48px;
+  line-height:inherit;
   bottom:0;
-  border-top:1px solid #C0BFC4;
+  text-align:center;
   background-color:#F7F7FA;
 }
-.tabbar-list{
-    list-style:none;
-    float:left;
-    display:block;
-    text-align:center;
-    line-height:1;
-}
-.list-common{
-    width:15%;
-    padding:5px 0;
-}
-.list-cart{
-    width:25%;
-    height:100%;
-    background-color:green;
-}
-.list-order{
-    background-color:blue;
-}
-.list-icon{
+.tabbar-icon{
+    margin:0 auto;
     width:27px;
     height:27px;
-    display:inline-block;
 }
-.list-icon-img{
-    width:100%;
-    height:100%;
+.tabbar-icon img{
+    width: 100%;
+    height: 100%;
 }
-.list-label{
-    font-size:10px;
+.tabbar-left{
+    display:block;
+    float:left;
+    width: 12%;
+    font-size:0.6rem;
+    padding-top:5px;
+    line-height:18px;
+}
+.tabbar-right{
+    display:block;
+    float:left;
+    line-height:48px;
+    font-size:1.2rem;
+    width: 32%;
+    height:48px;
+    color: #F9FAFC;
 }
 </style>
