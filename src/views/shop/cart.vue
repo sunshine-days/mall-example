@@ -16,39 +16,17 @@
         </flexbox-item>
     </flexbox>
     </div>
-    <div class="mall-tabbar">
-      <tabbar >
-      <tabbar-item link="/">
-        <img slot="icon" src="../../assets/home.png">
-        <img slot="icon-active" src="../../assets/home-active.png">
-        <span slot="label">首页</span>
-      </tabbar-item>
-      <tabbar-item  link="/shop/category">
-        <img slot="icon" src="../../assets/category.png">
-        <img slot="icon-active" src="../../assets/category-active.png">
-        <span slot="label">分类</span>
-      </tabbar-item>
-      <tabbar-item :selected="true" link="/shop/cart">
-        <img slot="icon" src="../../assets/cart.png">
-        <img slot="icon-active" src="../../assets/cart-active.png">
-        <span slot="label">购物车</span>
-      </tabbar-item>
-      <tabbar-item link="/user">
-        <img slot="icon" src="../../assets/user.png">
-        <img slot="icon-active" src="../../assets/user-active.png">
-        <span slot="label">个人中心</span>
-      </tabbar-item>
-    </tabbar>
-    </div>
+    <tabbars activeTab="cart"></tabbars>
   </div>
 </template>
 
 <script>
-import { Tabbar, TabbarItem, Flexbox, FlexboxItem, Divider, XButton } from 'vux'
+import tabbars from 'components/tabbar'
+import { Flexbox, FlexboxItem, Divider, XButton } from 'vux'
 
 export default {
   components: {
-    Tabbar, TabbarItem, Flexbox, FlexboxItem, Divider, XButton
+    Flexbox, FlexboxItem, Divider, XButton, tabbars
   },
   data () {
     return {

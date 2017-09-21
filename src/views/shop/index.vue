@@ -22,8 +22,7 @@
         <flexbox-item v-for="item in itemList">
 
            <router-link :to="{path: '/shop/item/' + item.id}">
- <div style="width:90%;margin:0 auto;background-color:#fff;box-shadow:0 0 1px #000 inset;">
-           
+ <div style="width:90%;margin:0 auto;background-color:#fff;box-shadow:0 0 1px #000 inset;">   
             <div>
               <img :src="item.img" style="width:100%;height:200px;">
             </div>
@@ -60,39 +59,16 @@
       </flexbox>
     </div>
   </div>
-  <div class="mall-tabbar">
-      <tabbar >
-      <tabbar-item :selected="true" link="/">
-        <img slot="icon" src="../../assets/home.png">
-        <img slot="icon-active" src="../../assets/home-active.png">
-        <span slot="label">首页</span>
-      </tabbar-item>
-      <tabbar-item link="/shop/category">
-        <img slot="icon" src="../../assets/category.png">
-        <img slot="icon-active" src="../../assets/category-active.png">
-        <span slot="label">分类</span>
-      </tabbar-item>
-      <tabbar-item link="/shop/cart">
-        <img slot="icon" src="../../assets/cart.png">
-        <img slot="icon-active" src="../../assets/cart-active.png">
-        <span slot="label">购物车</span>
-      </tabbar-item>
-      <tabbar-item link="/user">
-        <img slot="icon" src="../../assets/user.png">
-        <img slot="icon-active" src="../../assets/user-active.png">
-        <span slot="label">个人中心</span>
-      </tabbar-item>
-    </tabbar>
-    </div>
+    <tabbars activeTab="index"></tabbars>
 </div>
 </template>
 
 <script>
-// import tabbars from '@/components/tabbar'
-import { Tabbar, TabbarItem, Search, Swiper, SwiperItem, Flexbox, FlexboxItem, Divider } from 'vux'
+import tabbars from 'components/tabbar'
+import { Search, Swiper, SwiperItem, Flexbox, FlexboxItem, Divider } from 'vux'
 export default {
   components: {
-    Tabbar, TabbarItem, Search, Swiper, SwiperItem, Flexbox, FlexboxItem, Divider
+    Search, Swiper, SwiperItem, Flexbox, FlexboxItem, Divider, tabbars
   },
   data () {
     return {

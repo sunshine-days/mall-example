@@ -15,42 +15,42 @@ export default new Router({
       path: '/shop',
       name: 'index',
       component (resolve) {
-        require(['@/views/shop/index.vue'], resolve)
+        require(['views/shop/index.vue'], resolve)
       }
     },
     {
       path: '/shop/category',
       name: 'category',
       component (resolve) {
-        require(['@/views/shop/category.vue'], resolve)
+        require(['views/shop/category.vue'], resolve)
       }
     },
     {
       path: '/shop/cart',
       name: 'cart',
       component (resolve) {
-        require(['@/views/shop/cart.vue'], resolve)
+        require(['views/shop/cart.vue'], resolve)
       }
     },
     {
       path: '/shop/item/:id',
       name: 'item',
       component (resolve) {
-        require(['@/views/shop/item.vue'], resolve)
+        require(['views/shop/item.vue'], resolve)
       }
     },
     {
       path: '/user',
       name: 'head',
       component (resolve) {
-        require(['@/views/user/index.vue'], resolve)
+        require(['views/user/index.vue'], resolve)
       },
       children: [
         {
           path: '/user/order',
           name: 'order',
           component (resolve) {
-            require(['@/views/user/order.vue'], resolve)
+            require(['views/user/order.vue'], resolve)
           }
         }
       ]
@@ -59,7 +59,7 @@ export default new Router({
       path: '/login',
       name: 'login',
       component (resolve) {
-        require(['@/views/login.vue'], resolve)
+        require(['views/login.vue'], resolve)
       }
     }
   ]
