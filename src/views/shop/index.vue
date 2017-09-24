@@ -153,7 +153,7 @@ function getResult (val) {
 }
 </script>
 
-<style>
+<style scoped>
 .mall-search{
   position:fixed;
   width:100%;

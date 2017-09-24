@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+   <transition>
     <router-view></router-view>
+  </transition>
   </div>
 </template>
 
@@ -14,6 +16,8 @@ export default {
 @import '~vux/src/styles/reset.less';
 
 body {
+  width:100%;
+  height:100%;
   background-color: #EFF2F7;
   -webkit-overflow-scrolling:touch;
 }
