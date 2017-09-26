@@ -131,7 +131,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .mall-tabbar{
   position: fixed;
   width: 100%;

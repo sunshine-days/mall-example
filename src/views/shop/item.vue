@@ -4,6 +4,7 @@
       <div class="swiper">
         <swiper :list="swiperList" auto  height="300px" dots-class="custom-bottom" dots-position="center"></swiper>
       </div>
+      <!--商品信息-->
       <div class="info">
         <group>
           <div style="margin:15px;">
@@ -11,6 +12,7 @@
             <p class="second-title">作为中秋节礼物很有心意</p>
             <p class="show-price"><span class="price"><span style="font-size:15px;color:#ad0e11">￥</span>4299</span><span class="fr">免运费</span></p>
           </div>
+          <!--服务信息-->
           <a @click="isServiceShow = true" style="display:block;border-top:1px solid #eee;">
           <cell is-link value-align="left" >
           <div class="tips">
@@ -24,15 +26,18 @@
           </cell>
         </a>
         </group>
+        <!--规格-->
         <group style="margin-top:20px;">
         <a @click="showPanel('spec')" style="display:block;border-top:1px solid #eee;">
           <cell title="请选择规格" is-link ></cell>
         </a>
+        <!--产品信息-->
         <a @click="showPanel" style="display:block;border-top:1px solid #eee;">
           <cell title="产品参数" is-link ></cell>
         </a>
     </group>
       </div>
+      <!--图文介绍-->
       <div class="detail">
         <p>ssss</p>
         <p>ssss</p>
@@ -42,6 +47,7 @@
         
       </div>
     </div>
+    <!--底部tabbar-->
     <div class="mall-tabbar">
         <a class="tabbar-left">
             <div class="tabbar-icon">
@@ -49,18 +55,18 @@
             </div> 
             <span>客服</span>
         </a>
-        <a class="tabbar-left">
-            <div class="tabbar-icon">
+        <router-link class="tabbar-left" to="/">
+           <div class="tabbar-icon">
                 <img src="../../assets/home.png">
             </div> 
             <span>首页</span>
-        </a>
-        <a class="tabbar-left">
-            <div class="tabbar-icon">
+        </router-link>
+         <router-link class="tabbar-left" to="/shop/cart">
+           <div class="tabbar-icon">
                 <img src="../../assets/cart.png">
             </div> 
             <span>购物车</span>
-        </a>
+        </router-link>
         <a class="tabbar-right" style="background-color:#F7BA2A" @click="showPanel('cart')">
             <span>加入购物车</span>
         </a>
@@ -68,6 +74,7 @@
             <span>立即下单</span>
         </a>
     </div>
+    <!--服务说明弹窗-->
       <div class="service-info">
         <popup v-model="isServiceShow" position="bottom" height="60%" style="background-color:white">
           <div style="text-align:center;font-size:20px;margin-top:15px"><span>服务说明</span></div>
@@ -80,6 +87,7 @@
         </div>
       </popup>
       </div>
+      <!--规格选择弹窗-->
       <div class="select-spec">
          <popup v-model="panelShow" position="bottom" height="70%" style="background-color:white">
           <div class="item-info" style="margin-top:15px;margin-bottom:20px;">
@@ -94,27 +102,21 @@
         <group style="margin-bottom:60px;">
           <cell-box style="display:block;">
             <h4 style="margin-bottom:10px;font-size:18px;">选择颜色</h4>
-            <div style="margin-top:30px;margin-bottom:10px;">
-            <label style="border:1px solid #D3DCE6;padding:6px;border-radius:5px;">
-              <input type="radio" style="display:none;">
-              <span >黑色</span>
-            </label>
-             <label style="border:1px solid #D3DCE6;padding:6px;border-radius:5px;">
-              <input type="radio" style="display:none;">
-              <span >红色</span>
-            </label>
-             <label style="border:1px solid #D3DCE6;padding:6px;border-radius:5px;">
-              <input type="radio" style="display:none;">
-              <span >黄色</span>
-            </label>
+            <div class="spec-radio">
+              <Bradio v-for="color in colorList" :val="color.value" v-model="itemColor">{{color.label}}</Bradio>
+            <!--<label v-for="color in colorList" :class="{'isActive':(itemColor === color.value)}">
+              <input type="radio" style="display:none;" :value="color.value" v-model="itemColor">
+              <span >{{color.label}}</span>
+            </label>-->
           </div>
           </cell-box>
           <cell-box style="display:block;">
             <h4 style="margin-bottom:10px;font-size:18px;">选择类型</h4>
-            <div style="margin-top:30px;margin-bottom:10px;">
-              <span style="border:1px solid #D3DCE6;padding:6px;border-radius:5px;">清爽型</span>
-              <span style="border:1px solid #D3DCE6;padding:6px;border-radius:5px;">美白型</span>
-              <span style="border:1px solid #D3DCE6;padding:6px;border-radius:5px;">补水型</span>
+            <div class="spec-radio">
+              <label v-model="itemStyle" v-for="sty in styleList">
+              <input type="radio" style="display:none;" :value="sty.value">
+              <span >{{sty.label}}</span>
+            </label>
             </div>
           </cell-box>
           <cell  title="数量">
@@ -143,11 +145,11 @@
 </template>
 
 <script>
-// import tabbars from '@/components/tabbar'
+import Bradio from 'components/bto-radio'
 import { XButton, Swiper, SwiperItem, Group, Cell, CellBox, Popup, Flexbox, FlexboxItem, XNumber } from 'vux'
 export default {
   components: {
-    XButton, Swiper, SwiperItem, Group, Cell, CellBox, Popup, Flexbox, FlexboxItem, XNumber
+    XButton, Swiper, SwiperItem, Group, Cell, CellBox, Popup, Flexbox, FlexboxItem, XNumber, Bradio
   },
   data () {
     return {
@@ -174,7 +176,37 @@ export default {
       isSpecShow: false,
       panelShow: false,
       isOrderShow: false,
-      isCartShow: false
+      isCartShow: false,
+      itemColor: '',
+      itemStyle: '',
+      colorList: [
+        {
+          label: '红色',
+          value: 'red'
+        },
+        {
+          label: '白色',
+          value: 'white'
+        },
+        {
+          label: '黑色',
+          value: 'black'
+        }
+      ],
+      styleList: [
+        {
+          label: '清爽型',
+          value: 'qingshuang'
+        },
+        {
+          label: '补水型',
+          value: 'bushui'
+        },
+        {
+          label: '美白型',
+          value: 'meibai'
+        }
+      ]
     }
   },
   methods: {
@@ -197,6 +229,11 @@ export default {
           this.isSpecShow = false
           break
       }
+    }
+  },
+  watch: {
+    itemColor: function (value) {
+      console.log(value)
     }
   }
 }
@@ -286,5 +323,23 @@ export default {
   margin-left:10px;
   color:#ad0e11;
   font-size:18px;
+}
+.spec-radio{
+  margin-top:30px;
+  margin-bottom:10px;
+}
+.spec-radio label{
+  border:1px solid #D3DCE6;
+  padding:6px;
+  border-radius:5px;
+  margin-right:10px;
+  display:inline-block;
+}
+input[type=radio]:checked:after {
+  border:1px solid #D3DCE6;
+  padding:6px;
+  border-radius:5px;
+  margin-right:10px;
+  display:inline-block;
 }
 </style>

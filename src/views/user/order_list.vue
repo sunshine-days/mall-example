@@ -1,42 +1,59 @@
 <template>
   <div>
+      <!--顶部选项卡-->
       <div class="mall-tab">
         <tab active-color="#20A0FF">
-            <tab-item selected @on-item-click="onItemClick">推荐</tab-item>
-            <tab-item  @on-item-click="onItemClick">基因检测</tab-item>
-            <tab-item @on-item-click="onItemClick">健康服务</tab-item>
-            <tab-item @on-item-click="onItemClick">周边产品</tab-item>
+            <tab-item selected @on-item-click="onItemClick">全部</tab-item>
+            <tab-item  @on-item-click="onItemClick">待付款</tab-item>
+            <tab-item @on-item-click="onItemClick">待发货</tab-item>
+            <tab-item @on-item-click="onItemClick">已发货</tab-item>
+            <tab-item @on-item-click="onItemClick">已完成</tab-item>
+            <tab-item @on-item-click="onItemClick">已取消</tab-item>
         </tab>
       </div>
+      <!--页面主体-->
       <div class="content">
-            <flexbox orient="vertical" style="margin-top:30px;">
-        <flexbox-item v-for="item in itemList">
-          
-          <div style="width:90%;margin:0 auto;background-color:#fff;box-shadow:0 0 1px #000 inset;">
-            <a :href="item.url"></a>
-            <div>
-              <img :src="item.img" style="width:100%;height:200px;">
-            </div>
-            <div style="padding:0.5rem">
-               <div><span class="item-title">这是一次简单的旅行</span></div>
-            <div ><span class="item-price"><em style="font-style:normal">￥</em>455</span><span class="item-price-old">￥455</span></div>
-            </div>
-          </div>
-          
-        </flexbox-item>
-      </flexbox>
+          <!--订单列表-->
+            <flexbox orient="vertical">
+                <flexbox-item style="background-color:white">
+                    <div style="width:100%;">
+                        <div style="margin-top:10px;margin-bottom:10px;color:#8492A6;font-size:0.8rem">
+                            <span style="margin-left:10px;">订单号:</span>
+                            <span>YA1226554455663</span>
+                            <span style="display:inline-block;float:right;margin-right:10px;color:#20A0FF;font-size:1rem;line-height:1.1">待收货</span>
+                        </div>
+                        <div style="padding-top:10px;margin-bottom:10px;border-top:1px solid #eee;">
+                            <div style="width:84px;height:84px;margin-left:10px;">
+                                <img src="https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80" style="width:100%;height:100%;">
+                            </div>
+                        </div>
+                    </div>
+                </flexbox-item>
+                <flexbox-item style="background-color:white">
+                    <div style="width:100%;">
+                        <div style="margin-top:10px;margin-bottom:10px;color:#8492A6;font-size:0.8rem">
+                            <span style="margin-left:10px;">订单号:</span>
+                            <span>YA1226554455663</span>
+                            <span style="display:inline-block;float:right;margin-right:10px;color:#20A0FF;font-size:1rem;line-height:1.1">待收货</span>
+                        </div>
+                        <div style="padding-top:10px;margin-bottom:10px;border-top:1px solid #eee;">
+                            <div style="width:84px;height:84px;margin-left:10px;">
+                                <img src="https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80" style="width:100%;height:100%;">
+                            </div>
+                        </div>
+                    </div>
+                </flexbox-item>
+            </flexbox>
       </div>
-      <tabbars activeTab="category"></tabbars>
   </div>
 </template>
 
 <script>
-import tabbars from 'components/tabbar'
 import { Tab, TabItem, Flexbox, FlexboxItem } from 'vux'
 
 export default {
   components: {
-    Tab, TabItem, Flexbox, FlexboxItem, tabbars
+    Tab, TabItem, Flexbox, FlexboxItem
   },
   data () {
     return {
@@ -162,11 +179,6 @@ export default {
 </script>
 
 <style scoped>
-.mall-tabbar{
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
 .mall-tab{
     position: fixed;
     width: 100%;
@@ -177,8 +189,8 @@ export default {
     width:100%;
     overflow: auto;
     position:fixed;
-    top:30px;
-    bottom:60px;
+    top:44px;
+    bottom:30px;
     z-index:80;
 }
 .item-title{

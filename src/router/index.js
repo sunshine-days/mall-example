@@ -44,16 +44,14 @@ export default new Router({
       name: 'head',
       component (resolve) {
         require(['views/user/index.vue'], resolve)
-      },
-      children: [
-        {
-          path: '/user/order',
-          name: 'order',
-          component (resolve) {
-            require(['views/user/order.vue'], resolve)
-          }
-        }
-      ]
+      }
+    },
+    {
+      path: '/user/order',
+      name: 'head',
+      component (resolve) {
+        require(['views/user/order_list.vue'], resolve)
+      }
     },
     {
       path: '/login',

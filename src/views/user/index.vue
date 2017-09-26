@@ -7,7 +7,7 @@
         </cell>
       </group>
       <group >
-      <cell title="我的订单" is-link style="margin-top:10px;">
+      <cell title="我的订单" is-link style="margin-top:10px;" link="/user/order">
         <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../../assets/order.png">  
       </cell>
      
@@ -162,7 +162,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .mall-tabbar{
   position: fixed;
   width: 100%;
