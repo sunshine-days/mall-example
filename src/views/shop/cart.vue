@@ -15,6 +15,77 @@
         </div>
         </flexbox-item>
     </flexbox>
+    <div class="guess-like">
+            <divider style="margin-top:20px;margin-bottom:15px;">猜你喜欢</divider>
+              <flexbox>
+                <flexbox-item>
+                   <router-link to="/">
+                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
+                          <img src="https://static.vux.li/demo/1.jpg" style="width:100%;height:180px;">
+                      </div>
+                      <div style="padding:0.5rem">
+                      <div><span class="item-title">这是一次简单的旅行</span></div>
+                        <div >
+                          <span class="item-price">
+                          <em style="font-style:normal">￥</em>455</span>
+                          <span class="item-price-old">￥455</span>
+                        </div>
+                      </div>
+                    </div>
+                    </router-link>
+                </flexbox-item>
+                <flexbox-item>
+                  <router-link to="/">
+                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
+                          <img src="https://static.vux.li/demo/3.jpg" style="width:100%;height:180px;">
+                      </div>
+                      <div style="padding:0.5rem">
+                      <div><span class="item-title">这是一次简单的旅行</span></div>
+                        <div >
+                          <span class="item-price">
+                          <em style="font-style:normal">￥</em>455</span>
+                          <span class="item-price-old">￥455</span>
+                        </div>
+                      </div>
+                    </div>
+                    </router-link>
+                </flexbox-item>
+              </flexbox>
+              <flexbox>
+                <flexbox-item>
+                   <router-link to="/">
+                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
+                          <img src="https://static.vux.li/demo/3.jpg" style="width:100%;height:180px;">
+                      </div>
+                      <div style="padding:0.5rem">
+                      <div><span class="item-title">这是一次简单的旅行</span></div>
+                        <div >
+                          <span class="item-price">
+                          <em style="font-style:normal">￥</em>455</span>
+                          <span class="item-price-old">￥455</span>
+                        </div>
+                      </div>
+                    </div>
+                    </router-link>
+                </flexbox-item>
+                <flexbox-item>
+                  <router-link to="/">
+                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
+                          <img src="https://static.vux.li/demo/1.jpg" style="width:100%;height:180px;">
+                      </div>
+                      <div style="padding:0.5rem">
+                      <div><span class="item-title">这是一次简单的旅行</span></div>
+                        <div >
+                          <span class="item-price">
+                          <em style="font-style:normal">￥</em>455</span>
+                          <span class="item-price-old">￥455</span>
+                        </div>
+                      </div>
+                    </div>
+                    </router-link>
+                </flexbox-item>
+              </flexbox>
+          </div>
     </div>
     <tabbars activeTab="cart"></tabbars>
   </div>
@@ -146,5 +217,18 @@ export default {
   border-radius: 4px;
   color:#99A9BF;
   background-clip: padding-box;
+}
+.guess-like{
+  margin-bottom:65px;
+}
+.item-price{
+  font-size: 1.2rem;
+  color: #FF4949;
+}
+.item-price-old{
+  margin-left:.3rem;
+  font-size:0.9rem;
+  color: #99A9BF;
+  text-decoration:line-through;
 }
 </style>

@@ -13,47 +13,30 @@
       <!--页面主体-->
       <div class="content">
           <!--订单列表-->
-            <flexbox >
-                <flexbox-item class="order-info">
+            <flexbox orient="vertical" v-if="orderList.length != 0">
+                <flexbox-item class="order-info" v-for="order in orderList" >
                   <!--订单信息-->
                     <div style="width:100%;">
                         <div class="order-no">
                             <span class="order-no-title">订单号:</span>
-                            <span>YA1226554455663</span>
-                            <span class="order-state">待付款</span>
+                            <span>{{order.orderId}}</span>
+                            <span class="order-state">{{getStateName(order.state)}}</span>
                         </div>
                         <!--订单商品信息-->
-                        <div class="order-item">
+                        <div class="order-item" v-for="item in order.items">
                             <div class="order-item-img">
-                                <img src="https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80">
+                                <img :src="item.imgUrl">
                             </div>
                             <div class="order-item-info-left">
-                              <span class="order-item-info-name">双层茶杯+茶味月饼</span>
-                              <span class="order-item-info-spec">规格:红色套装</span>
+                              <span class="order-item-info-name">{{item.name}}</span>
+                              <span class="order-item-info-spec">规格:{{item.spec}}</span>
                             </div>
                             <div class="order-item-info-right">
                               <div class="order-item-info-price">
                                 <p>
-                                  <span>￥2266.00</span>
+                                  <span>￥{{item.salePrice}}</span>
                                 </p>
-                                <span class="order-item-info-quantity">x1</span>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="order-item">
-                            <div class="order-item-img">
-                                <img src="https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80">
-                            </div>
-                            <div class="order-item-info-left">
-                              <span class="order-item-info-name">双层茶杯+茶味月饼神神道道沙第三方胜多负少的发撒打算打算双方都是固定的范德萨发胜多负少的</span>
-                              <span class="order-item-info-spec">规格:红色套装</span>
-                            </div>
-                            <div class="order-item-info-right">
-                              <div class="order-item-info-price">
-                                <p>
-                                  <span>￥499.00</span>
-                                </p>
-                                <span class="order-item-info-quantity">x1</span>
+                                <span class="order-item-info-quantity">x{{item.quantity}}</span>
                               </div>
                             </div>
                         </div>
@@ -66,24 +49,126 @@
                         </div>
                         <!--订单操作-->
                         <div class="order-options">
-                          <div class="order-options-button-group">
+                          <div class="order-options-button-group" v-if="order.state === 'ORDERING'">
                             <x-button  type="primary" plain mini>取消订单</x-button>
                             <x-button type="primary" plain mini style="color: #fff;background-color: #20A0FF;">付款</x-button>
+                          </div>
+                          <div class="order-options-button-group" v-if="order.state === 'PAID'">
+                            <x-button  type="primary" plain mini>退款</x-button>
+                            <x-button type="primary" plain mini style="color: #fff;background-color: #20A0FF;">通知发货</x-button>
+                          </div>
+                          <div class="order-options-button-group" v-if="order.state === 'DELIVERED'">
+                            <x-button  type="primary" plain mini>查看物流</x-button>
+                            <x-button type="primary" plain mini style="color: #fff;background-color: #20A0FF;">确认收货</x-button>
+                          </div>
+                          <div class="order-options-button-group" v-if="order.state === 'FINISHED'">
+                            <x-button  type="primary" plain mini>删除订单</x-button>
+                            <x-button type="primary" plain mini style="color: #fff;background-color: #20A0FF;">再买一次</x-button>
                           </div>
                         </div>
                     </div>
                 </flexbox-item>
             </flexbox>
+          <div class="empty-order" v-else>
+            <divider style="margin-top:10px">暂无订单</divider>
+              <flexbox orient="vertical" style="margin-top:30px;">
+                <flexbox-item><div class="flex-demo"><img src="../../assets/cart-icon.png"></div></flexbox-item>
+                  <flexbox-item>
+                    <div class="flex-demo">
+                      <span>您还没有任何订单记录</span>
+                    </div>
+                  </flexbox-item>
+                <flexbox-item>
+                  <div class="flex-demo">
+                    <x-button type="primary" style="width:40%">去逛逛</x-button>
+                  </div>
+                </flexbox-item>
+              </flexbox>
+          </div>
+          <div class="guess-like">
+            <divider style="margin-top:20px;margin-bottom:15px;">猜你喜欢</divider>
+              <flexbox>
+                <flexbox-item>
+                   <router-link to="/">
+                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
+                          <img src="https://static.vux.li/demo/1.jpg" style="width:100%;height:180px;">
+                      </div>
+                      <div style="padding:0.5rem">
+                      <div><span class="item-title">这是一次简单的旅行</span></div>
+                        <div >
+                          <span class="item-price">
+                          <em style="font-style:normal">￥</em>455</span>
+                          <span class="item-price-old">￥455</span>
+                        </div>
+                      </div>
+                    </div>
+                    </router-link>
+                </flexbox-item>
+                <flexbox-item>
+                  <router-link to="/">
+                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
+                          <img src="https://static.vux.li/demo/3.jpg" style="width:100%;height:180px;">
+                      </div>
+                      <div style="padding:0.5rem">
+                      <div><span class="item-title">这是一次简单的旅行</span></div>
+                        <div >
+                          <span class="item-price">
+                          <em style="font-style:normal">￥</em>455</span>
+                          <span class="item-price-old">￥455</span>
+                        </div>
+                      </div>
+                    </div>
+                    </router-link>
+                </flexbox-item>
+              </flexbox>
+              <flexbox>
+                <flexbox-item>
+                   <router-link to="/">
+                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
+                          <img src="https://static.vux.li/demo/3.jpg" style="width:100%;height:180px;">
+                      </div>
+                      <div style="padding:0.5rem">
+                      <div><span class="item-title">这是一次简单的旅行</span></div>
+                        <div >
+                          <span class="item-price">
+                          <em style="font-style:normal">￥</em>455</span>
+                          <span class="item-price-old">￥455</span>
+                        </div>
+                      </div>
+                    </div>
+                    </router-link>
+                </flexbox-item>
+                <flexbox-item>
+                  <router-link to="/">
+                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
+                          <img src="https://static.vux.li/demo/1.jpg" style="width:100%;height:180px;">
+                      </div>
+                      <div style="padding:0.5rem">
+                      <div><span class="item-title">这是一次简单的旅行</span></div>
+                        <div >
+                          <span class="item-price">
+                          <em style="font-style:normal">￥</em>455</span>
+                          <span class="item-price-old">￥455</span>
+                        </div>
+                      </div>
+                    </div>
+                    </router-link>
+                </flexbox-item>
+              </flexbox>
+          </div>
       </div>
   </div>
 </template>
 
 <script>
-import { Tab, TabItem, Flexbox, FlexboxItem, XButton } from 'vux'
+import { Tab, TabItem, Flexbox, FlexboxItem, XButton, Divider } from 'vux'
 
 export default {
   components: {
-    Tab, TabItem, Flexbox, FlexboxItem, XButton
+    Tab, TabItem, Flexbox, FlexboxItem, XButton, Divider
+  },
+  mounted () {
+    // this.orderList = this.allList
   },
   data () {
     return {
@@ -93,26 +178,147 @@ export default {
       // its initial state.
       msg: 'Hello World!',
       showMore: false,
-      orderList: [
+      orderList: [],
+      onOrderingList: [
         {
           orderId: 'TD12222547854548612',
-          state: 'ORDERING'
+          state: 'ORDERING',
+          items: [
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            },
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼辛苦辛苦开心开心看开心卡卡西开心开心看开心开心看',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            }
+          ]
+        }
+      ],
+      paidList: [
+        {
+          orderId: 'TD12222547854548612',
+          state: 'PAID',
+          items: [
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            }
+          ]
+        }
+      ],
+      deliveredList: [
+        {
+          orderId: 'TD12222547854548612',
+          state: 'DELIVERED',
+          items: [
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            },
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼辛苦辛苦开心开心看开心卡卡西开心开心看开心开心看',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            }
+          ]
+        }
+      ],
+      finishedList: [
+        {
+          orderId: 'TD12222547854548612',
+          state: 'FINISHED',
+          items: [
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            }
+          ]
+        }
+      ],
+      allList: [
+        {
+          orderId: 'TD12222547854548612',
+          state: 'ORDERING',
+          items: [
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            },
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼辛苦辛苦开心开心看开心卡卡西开心开心看开心开心看',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            }
+          ]
         },
         {
-          url: '2',
-          img: 'https://static.vux.li/demo/2.jpg'
+          orderId: 'TD12222547854548612',
+          state: 'DELIVERED',
+          items: [
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            },
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼辛苦辛苦开心开心看开心卡卡西开心开心看开心开心看',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            }
+          ]
         },
         {
-          url: '3',
-          img: 'https://static.vux.li/demo/1.jpg'
+          orderId: 'TD12222547854548612',
+          state: 'PAID',
+          items: [
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            }
+          ]
         },
         {
-          url: '4',
-          img: 'https://static.vux.li/demo/3.jpg'
-        },
-        {
-          url: '5',
-          img: 'https://static.vux.li/demo/2.jpg'
+          orderId: 'TD12222547854548612',
+          state: 'FINISHED',
+          items: [
+            {
+              imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
+              name: '双层茶杯+茶味月饼',
+              spec: '红色套装',
+              quantity: 1,
+              salePrice: 2669
+            }
+          ]
         }
       ]
     }
@@ -121,88 +327,39 @@ export default {
     onItemClick (index) {
       switch (index) {
         case 0:
-          this.itemList = [
-            {
-              url: '1',
-              img: 'https://static.vux.li/demo/3.jpg'
-            },
-            {
-              url: '2',
-              img: 'https://static.vux.li/demo/2.jpg'
-            },
-            {
-              url: '3',
-              img: 'https://static.vux.li/demo/1.jpg'
-            },
-            {
-              url: '4',
-              img: 'https://static.vux.li/demo/3.jpg'
-            },
-            {
-              url: '5',
-              img: 'https://static.vux.li/demo/2.jpg'
-            }
-          ]
+          this.orderList = this.allList
           break
         case 1:
-          this.itemList = [
-            {
-              url: '1',
-              img: 'https://static.vux.li/demo/3.jpg'
-            },
-            {
-              url: '2',
-              img: 'https://static.vux.li/demo/2.jpg'
-            },
-            {
-              url: '3',
-              img: 'https://static.vux.li/demo/1.jpg'
-            }
-          ]
+          this.orderList = this.onOrderingList
           break
         case 2:
-          this.itemList = [
-            {
-              url: '1',
-              img: 'https://static.vux.li/demo/3.jpg'
-            },
-            {
-              url: '2',
-              img: 'https://static.vux.li/demo/2.jpg'
-            },
-            {
-              url: '3',
-              img: 'https://static.vux.li/demo/1.jpg'
-            },
-            {
-              url: '4',
-              img: 'https://static.vux.li/demo/1.jpg'
-            }
-          ]
+          this.orderList = this.paidList
           break
         case 3:
-          this.itemList = [
-            {
-              url: '1',
-              img: 'https://static.vux.li/demo/3.jpg'
-            },
-            {
-              url: '2',
-              img: 'https://static.vux.li/demo/2.jpg'
-            },
-            {
-              url: '3',
-              img: 'https://static.vux.li/demo/1.jpg'
-            },
-            {
-              url: '4',
-              img: 'https://static.vux.li/demo/1.jpg'
-            }
-          ]
+          this.orderList = this.deliveredList
           break
-        default:
+        case 4:
+          this.orderList = this.finishedList
           break
       }
+    },
+    getStateName (state) {
+      let name = '未知'
+      switch (state) {
+        case 'ORDERING':
+          name = '待付款'
+          break
+        case 'PAID':
+          name = '待发货'
+          break
+        case 'DELIVERED':
+          name = '已发货'
+          break
+        case 'FINISHED':
+          name = '完成'
+          break
+      }
+      return name
     }
   }
 }
@@ -265,6 +422,11 @@ export default {
   padding-top:10px;
   border-top:1px solid #eee;
   display:flow-root;
+}
+.order-item:after{
+  content:'';
+  display: table;
+  clear: both;
 }
 .order-item .order-item-img{
   width:84px;
@@ -339,5 +501,15 @@ export default {
   float:right;
   padding-bottom:10px;
   margin-right:10px;
+}
+.empty-order{
+  margin:0 auto;
+  width:98%;
+}
+.flex-demo {
+  text-align: center;
+  border-radius: 4px;
+  color:#99A9BF;
+  background-clip: padding-box;
 }
 </style>
