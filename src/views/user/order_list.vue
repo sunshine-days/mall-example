@@ -14,7 +14,7 @@
       <div class="content">
           <!--订单列表-->
             <flexbox orient="vertical" v-if="orderList.length != 0">
-                <flexbox-item class="order-info" v-for="order in orderList" >
+                <flexbox-item class="order-info" v-for="(order, index) in orderList" :key="index">
                   <!--订单信息-->
                     <div style="width:100%;">
                         <div class="order-no">
