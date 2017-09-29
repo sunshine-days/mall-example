@@ -19,7 +19,7 @@
     <div class="item">
       <divider>热门商品</divider>
       <flexbox orient="vertical" style="margin-top:30px;">
-        <flexbox-item v-for="item in itemList">
+        <flexbox-item v-for="(item, index) in itemList" :key="index">
 
            <router-link :to="{path: '/shop/item/' + item.id}">
  <div style="width:90%;margin:0 auto;background-color:#fff;box-shadow:0 0 1px #000 inset;">   
@@ -39,8 +39,7 @@
 
        <divider style="margin-top:30px">小壹推荐</divider>
       <flexbox orient="vertical" style="margin-top:30px;">
-        <template v-for="item in itemList">
-          <flexbox-item >
+          <flexbox-item v-for="(item, index) in itemList" :key="index">
             <router-link :to="{path: '/shop/item/' + item.id}">
             <div style="width:90%;margin:0 auto;background-color:#fff">
             
@@ -53,9 +52,7 @@
             </div>
             </div>
             </router-link>
-          
         </flexbox-item>
-          </template>
       </flexbox>
     </div>
   </div>

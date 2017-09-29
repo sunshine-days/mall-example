@@ -87,11 +87,12 @@
           </div>
           <div class="guess-like">
             <divider style="margin-top:20px;margin-bottom:15px;">猜你喜欢</divider>
-              <flexbox>
+              <flexbox style="margin-bottom:15px;">
                 <flexbox-item>
                    <router-link to="/">
-                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
-                          <img src="https://static.vux.li/demo/1.jpg" style="width:100%;height:180px;">
+                      <div style="width:96%;padding:5px;background-color:#fff">
+                        <div style="width:100%;height:180px;">
+                          <img src="https://static.vux.li/demo/1.jpg" style="width:100%;height:100%;">
                       </div>
                       <div style="padding:0.5rem">
                       <div><span class="item-title">这是一次简单的旅行</span></div>
@@ -106,8 +107,9 @@
                 </flexbox-item>
                 <flexbox-item>
                   <router-link to="/">
-                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
-                          <img src="https://static.vux.li/demo/3.jpg" style="width:100%;height:180px;">
+                      <div style="width:96%;padding:5px;background-color:#fff">
+                      <div style="width:100%;height:180px;">
+                          <img src="https://static.vux.li/demo/3.jpg" style="width:100%;height:100%;">
                       </div>
                       <div style="padding:0.5rem">
                       <div><span class="item-title">这是一次简单的旅行</span></div>
@@ -121,11 +123,12 @@
                     </router-link>
                 </flexbox-item>
               </flexbox>
-              <flexbox>
+              <flexbox style="margin-bottom:15px;">
                 <flexbox-item>
                    <router-link to="/">
-                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
-                          <img src="https://static.vux.li/demo/3.jpg" style="width:100%;height:180px;">
+                      <div style="width:96%;padding:5px;background-color:#fff">
+                        <div style="width:100%;height:180px;">
+                          <img src="https://static.vux.li/demo/1.jpg" style="width:100%;height:100%;">
                       </div>
                       <div style="padding:0.5rem">
                       <div><span class="item-title">这是一次简单的旅行</span></div>
@@ -140,8 +143,9 @@
                 </flexbox-item>
                 <flexbox-item>
                   <router-link to="/">
-                      <div style="width:96%;margin:0 auto;background-color:#fff"><div>
-                          <img src="https://static.vux.li/demo/1.jpg" style="width:100%;height:180px;">
+                      <div style="width:96%;padding:5px;background-color:#fff">
+                      <div style="width:100%;height:180px;">
+                          <img src="https://static.vux.li/demo/3.jpg" style="width:100%;height:100%;">
                       </div>
                       <div style="padding:0.5rem">
                       <div><span class="item-title">这是一次简单的旅行</span></div>

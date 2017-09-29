@@ -10,7 +10,7 @@
       </div>
       <div class="content">
             <flexbox orient="vertical" style="margin-top:30px;">
-        <flexbox-item v-for="item in itemList">
+        <flexbox-item v-for="(item, index) in itemList" :key="index">
           
           <div style="width:90%;margin:0 auto;background-color:#fff;box-shadow:0 0 1px #000 inset;">
             <a :href="item.url"></a>

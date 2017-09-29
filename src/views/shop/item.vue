@@ -29,7 +29,7 @@
         <!--规格-->
         <group style="margin-top:20px;">
         <a @click="showPanel('spec')" style="display:block;border-top:1px solid #eee;">
-          <cell title="请选择规格" is-link ></cell>
+          <cell title="请选择规格" is-link :value="(itemColor !== '' && itemStyle !== '') ? '已选:'+itemColor+','+itemStyle : ''"></cell>
         </a>
         <!--产品信息-->
         <a @click="showPanel" style="display:block;border-top:1px solid #eee;">
@@ -39,11 +39,7 @@
       </div>
       <!--图文介绍-->
       <div class="detail">
-        <p>ssss</p>
-        <p>ssss</p>
-        <p>ssss</p>
-        <p>ssss</p>
-        <p>ssss</p>
+        <p>富文本区域</p>
         
       </div>
     </div>
@@ -103,20 +99,28 @@
           <cell-box style="display:block;">
             <h4 style="margin-bottom:10px;font-size:18px;">选择颜色</h4>
             <div class="spec-radio">
-              <Bradio v-for="color in colorList" :val="color.value" v-model="itemColor">{{color.label}}</Bradio>
-            <!--<label v-for="color in colorList" :class="{'isActive':(itemColor === color.value)}">
-              <input type="radio" style="display:none;" :value="color.value" v-model="itemColor">
-              <span >{{color.label}}</span>
-            </label>-->
+              <checker
+                v-model="itemColor"
+                default-item-class="radio"
+                selected-item-class="radio-selected"
+                disabled-item-class="radio-disabled">
+                <checker-item value="黑色" @on-item-click="onItemClick">黑色</checker-item>
+                <checker-item value="红色" @on-item-click="onItemClick">红色</checker-item>
+                <checker-item value="白色" @on-item-click="onItemClick">白色</checker-item>
+                <checker-item value="灰色" disabled @on-item-click="onItemClick">灰色</checker-item>
+            </checker>
           </div>
           </cell-box>
           <cell-box style="display:block;">
             <h4 style="margin-bottom:10px;font-size:18px;">选择类型</h4>
             <div class="spec-radio">
-              <label v-model="itemStyle" v-for="sty in styleList">
-              <input type="radio" style="display:none;" :value="sty.value">
-              <span >{{sty.label}}</span>
-            </label>
+              <checker
+                v-model="itemStyle"
+                default-item-class="radio"
+                selected-item-class="radio-selected"
+                disabled-item-class="radio-disabled">
+                <checker-item v-for="(sty, index) in styleList" :key="index" :value="sty.label" @on-item-click="onItemClick">{{sty.label}}</checker-item>
+            </checker>
             </div>
           </cell-box>
           <cell  title="数量">
@@ -145,11 +149,11 @@
 </template>
 
 <script>
-import Bradio from 'components/bto-radio'
-import { XButton, Swiper, SwiperItem, Group, Cell, CellBox, Popup, Flexbox, FlexboxItem, XNumber } from 'vux'
+// import Bradio from 'components/bto-radio'
+import { XButton, Swiper, SwiperItem, Group, Cell, CellBox, Popup, Flexbox, FlexboxItem, XNumber, Checker, CheckerItem } from 'vux'
 export default {
   components: {
-    XButton, Swiper, SwiperItem, Group, Cell, CellBox, Popup, Flexbox, FlexboxItem, XNumber, Bradio
+    XButton, Swiper, SwiperItem, Group, Cell, CellBox, Popup, Flexbox, FlexboxItem, XNumber, Checker, CheckerItem
   },
   data () {
     return {
@@ -177,7 +181,7 @@ export default {
       panelShow: false,
       isOrderShow: false,
       isCartShow: false,
-      itemColor: '',
+      itemColor: '黑色',
       itemStyle: '',
       colorList: [
         {
@@ -229,6 +233,9 @@ export default {
           this.isSpecShow = false
           break
       }
+    },
+    onItemClick () {
+      console.log(this.itemColor)
     }
   },
   watch: {
@@ -328,18 +335,19 @@ export default {
   margin-top:30px;
   margin-bottom:10px;
 }
-.spec-radio label{
+.radio{
   border:1px solid #D3DCE6;
   padding:6px;
   border-radius:5px;
   margin-right:10px;
   display:inline-block;
 }
-input[type=radio]:checked:after {
-  border:1px solid #D3DCE6;
-  padding:6px;
-  border-radius:5px;
-  margin-right:10px;
-  display:inline-block;
+.radio-selected{
+  border:1px solid #20A0FF;
+  color:#20A0FF;
+}
+.radio-disabled{
+  background-color: #eee;
+  color:#8492A6;
 }
 </style>
