@@ -1,5 +1,6 @@
 <template>
   <div>
+    <x-header  style="background-color:#20A0FF;padding-bottom:0px;">我的订单</x-header>
       <!--顶部选项卡-->
       <div class="mall-tab">
         <tab active-color="#20A0FF">
@@ -165,11 +166,11 @@
 </template>
 
 <script>
-import { Tab, TabItem, Flexbox, FlexboxItem, XButton, Divider } from 'vux'
+import { Tab, TabItem, Flexbox, FlexboxItem, XButton, Divider, XHeader } from 'vux'
 
 export default {
   components: {
-    Tab, TabItem, Flexbox, FlexboxItem, XButton, Divider
+    Tab, TabItem, Flexbox, FlexboxItem, XButton, Divider, XHeader
   },
   mounted () {
     // this.orderList = this.allList
@@ -372,13 +373,13 @@ export default {
 <style scoped>
 .mall-tab{
     position: fixed;
+    top:40px;
     width: 100%;
-    top: 0;
     z-index:100;
 }
 .content{
     width:100%;
-    overflow: auto;
+    overflow-x: hidden;
     position:fixed;
     top:44px;
     bottom:30px;

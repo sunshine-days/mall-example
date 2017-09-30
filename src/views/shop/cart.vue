@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header :left-options="{showBack: false}" style="background-color:#000;">购物车</x-header>
+    <x-header :left-options="{showBack: false}" style="background-color:#20A0FF;">购物车</x-header>
     <div class="empty-cart" v-show="false">
       <flexbox orient="vertical" style="margin-top:30px;">
       <flexbox-item><div class="flex-demo"><img src="../../assets/cart-icon.png"></div></flexbox-item>
@@ -93,10 +93,11 @@
     </div>
     <div style="width:100%">
       <group >
-      <cell title="操作" style="background-color:#F7F7FA;">
-          <x-button type="primary" mini  link="/demo">编辑</x-button>
+      <cell title="操作" >
+          <x-button type="primary" mini @click.native="selectOption('edit')" v-if="!optionFlag">编辑</x-button>
+          <x-button type="primary" mini @click.native="selectOption('close')" v-else>完成</x-button>
         </cell>
-        <cell-box style="background-color:#F7F7FA;margin-top:10px;">
+        <cell-box >
           <check-icon :value.sync="demo1"></check-icon>
           <div style="width:84px;height:84px;">
             <img src="https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80" style="width:100%;height:100%;">
@@ -108,7 +109,7 @@
           </div>
           <inline-x-number style="position:absolute;right:0px;bottom:10px" :min="1" width="40px" button-style="round"></inline-x-number>
         </cell-box>
-        <cell-box style="background-color:#F7F7FA;margin-top:10px;">
+        <cell-box>
           <check-icon :value.sync="demo1"></check-icon>
           <div style="width:84px;height:84px;">
             <img src="https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80" style="width:100%;height:100%;">
@@ -126,10 +127,13 @@
       <group >
       <cell-box style="background-color:#F7F7FA;">
          <check-icon :value.sync="demo1">全选</check-icon>
-         <div style="position:absolute;right:10px;">
-          <span>合计:</span>
-          <span>￥45.00</span>
+         <div style="position:absolute;right:10px;" v-if="!optionFlag">
+          <span style="color:#475669;font-size:0.8rem">合计:</span>
+          <span style="color:#FF4949;font-size:1.2rem">￥45.00</span>
           <x-button type="primary" mini link="/demo">下单</x-button>
+         </div>
+         <div style="position:absolute;right:10px;" v-else>
+          <x-button type="primary" mini link="/demo" style="background-color:#FF4949">删除选中</x-button>
          </div>
       </cell-box>
     </group>
@@ -140,11 +144,11 @@
 
 <script>
 import tabbars from 'components/tabbar'
-import { Flexbox, Cell, CellBox, FlexboxItem, Divider, XButton, XHeader, Checker, CheckerItem, CheckIcon, InlineXNumber } from 'vux'
+import { Flexbox, Cell, CellBox, FlexboxItem, Divider, XButton, XHeader, Checker, CheckerItem, CheckIcon, InlineXNumber, Group } from 'vux'
 
 export default {
   components: {
-    Flexbox, FlexboxItem, Cell, CellBox, Divider, XButton, tabbars, XHeader, Checker, CheckerItem, CheckIcon, InlineXNumber
+    Flexbox, FlexboxItem, Cell, CellBox, Divider, XButton, tabbars, XHeader, Checker, CheckerItem, CheckIcon, InlineXNumber, Group
   },
   data () {
     return {
@@ -155,6 +159,7 @@ export default {
       msg: 'Hello World!',
       demo1: false,
       showMore: false,
+      optionFlag: false,
       items: [
         {
           imgUrl: 'https://img01.yit.com/5/7/577335f00d263.jpg-124.124.80',
@@ -262,7 +267,17 @@ export default {
         default:
           break
       }
+    },
+    selectOption (flag) {
+      if (flag === 'edit') {
+        this.optionFlag = true
+      }
+      if (flag === 'close') {
+        this.optionFlag = false
+      }
     }
+  },
+  watch: {
   }
 }
 </script>
